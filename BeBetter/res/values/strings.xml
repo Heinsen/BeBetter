@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">BeBetter</string>
+    <string name="item_adapter_challenge_feed_btn_share_text">Share</string>
+    <string name="item_adapter_challenge_feed_btn_accept_challenge">Challenge Accepted</string>
 
 </resources>

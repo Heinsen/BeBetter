@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/item_adapter_challenge_feed_text_view_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:textSize="21sp"
+        />
+    <ImageView 
+        android:id="@+id/item_adapter_challenge_feed_image_view_1"
+        android:layout_below="@id/item_adapter_challenge_feed_text_view_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <ImageView 
+        android:id="@+id/item_adapter_challenge_feed_image_view_2"
+        android:layout_toRightOf="@id/item_adapter_challenge_feed_image_view_1"
+        android:layout_below="@id/item_adapter_challenge_feed_text_view_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <Button 
+        android:id="@+id/item_adapter_challenge_feed_btn_share"
+        android:layout_below="@id/item_adapter_challenge_feed_image_view_1"
+        android:text="@string/item_adapter_challenge_feed_btn_share_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <Button 
+        android:id="@+id/item_adapter_challenge_feed_btn_accept_challenge"
+        android:layout_toRightOf="@id/item_adapter_challenge_feed_btn_share"
+        android:layout_below="@id/item_adapter_challenge_feed_image_view_2"
+        android:text="@string/item_adapter_challenge_feed_btn_accept_challenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</RelativeLayout>
