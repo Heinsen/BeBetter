@@ -31,10 +31,8 @@ public class ChallengeFeedItemAdapter extends ArrayAdapter<Challenge>{
 	public View getView(int position, View convertView, ViewGroup parent){
 		
 		ChallengeFeedItemViewHolder viewHolder;
-		if (convertView == null) {
-			//LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			//convertView = inflater.inflate(R.layout.item_adapter_challenge_feed, null);
-			
+		if (convertView == null || convertView.getTag() == null) {
+						
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_adapter_challenge_feed, null);
 			viewHolder = new ChallengeFeedItemViewHolder();
 			viewHolder.headLineTextView = (TextView) convertView.findViewById(R.id.item_adapter_challenge_feed_text_view_head_line);

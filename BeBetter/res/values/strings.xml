@@ -3,5 +3,13 @@
     <string name="app_name">BeBetter</string>
     <string name="item_adapter_challenge_feed_btn_share_text">Share</string>
     <string name="item_adapter_challenge_feed_btn_accept_challenge">Challenge Accepted</string>
-
+    <string name="fragment_main_text_view_challenge_head_line">Write Challenge</string>
+    <string name="fragment_main_edit_text_challenge">Have a drink</string>
+    <string name="fragment_main_btn_challenge_friend">Challenge Friend</string>
+	<string name="fragment_main_text_view_current_challenges_head_line">Current Challenges</string>
+	<string name="item_adapter_phone_contacts_btn_add_contacts">+</string>
+	<string name="fragment_contacts_text_view_contacts_with_bebetter_head_line">Contacts with BeBetter</string>
+	<string name="fragment_contacts_text_view_phone_contacts_head_line">Contacts without BeBetter</string>
+	<string name="fragment_contacts_text_view_bebetter_friends">BeBetter friends</string>
+	<string name="fragment_contacts_search_view">Find contact</string>
 </resources>

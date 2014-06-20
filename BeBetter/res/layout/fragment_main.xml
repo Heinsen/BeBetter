@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView 
+        android:id="@+id/fragment_main_text_view_challenge_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/fragment_main_text_view_challenge_head_line"
+        android:textSize="21sp"
+        />
+    
+    <EditText 
+        android:id="@+id/fragment_main_edit_text_challenge"
+        android:layout_width="500sp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/fragment_main_edit_text_challenge"
+        android:layout_below="@id/fragment_main_text_view_challenge_head_line"
+        />
+    
+    <Button 
+        android:id="@+id/fragment_main_btn_challenge_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fragment_main_edit_text_challenge"
+        android:text="@string/fragment_main_btn_challenge_friend"
+        />
+    
+    <View 
+        android:id="@+id/fragment_main_divider"
+        style="@style/Divider"
+        android:layout_below="@id/fragment_main_btn_challenge_friend"
+        />
+    
+    <TextView
+        android:id="@+id/fragment_main_text_view_current_challenges_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fragment_main_divider"
+        android:text="@string/fragment_main_text_view_current_challenges_head_line"
+        />
+    
+    <ListView 
+        android:id="@+id/fragment_main_list_view_current_challenges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_main_text_view_current_challenges_head_line"
+        />
+    
+
+</RelativeLayout>

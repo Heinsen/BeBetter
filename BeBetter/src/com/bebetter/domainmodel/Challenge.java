@@ -8,7 +8,6 @@ public class Challenge {
 
 	int mChallengeID;
 	String mHeadlineText;
-	String mBodyText;
 	//Some list with items
 	List<Integer> mPictures;
 	
@@ -18,7 +17,14 @@ public class Challenge {
 		mPictures.add(R.drawable.dame);
 		
 		mHeadlineText = "TEST HeadLineText TEST";
-		mBodyText = "TEST BodyText TEST";
+	}
+	
+	public int getmChallengeID() {
+		return mChallengeID;
+	}
+
+	public void setmChallengeID(int mChallengeID) {
+		this.mChallengeID = mChallengeID;
 	}
 
 	public String getHeadlineText() {
@@ -27,14 +33,6 @@ public class Challenge {
 
 	public void setHeadlineText(String HeadlineText) {
 		this.mHeadlineText = HeadlineText;
-	}
-
-	public String getBodyText() {
-		return mBodyText;
-	}
-
-	public void setBodyText(String BodyText) {
-		this.mBodyText = BodyText;
 	}
 
 	public List<Integer> getPictures() {
