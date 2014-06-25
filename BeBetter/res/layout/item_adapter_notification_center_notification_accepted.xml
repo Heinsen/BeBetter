@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView 
+        android:id="@+id/item_adapter_notification_center_notification_accepted_text_view_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"     
+        />
+    
+    <TextView 
+        android:id="@+id/item_adapter_notification_center_notification_accepted_text_view_time_stamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_below="@id/item_adapter_notification_center_notification_accepted_text_view_head_line"
+        />
+
+</RelativeLayout>

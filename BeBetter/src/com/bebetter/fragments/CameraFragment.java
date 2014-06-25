@@ -20,20 +20,14 @@ public class CameraFragment extends Fragment{
 	//private Camera mCamera;
     private CameraPreview mPreview;
     private ICameraActivityCallback mCallback;
+    private FrameLayout mFrameLayout;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		View cameraFragmentView = inflater.inflate(R.layout.fragment_camera, container, false);
-		
-		//mCamera = mCallback.getCameraInstance(1);
-        //TODO else if no cameras are available
-        
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = mCallback.getCameraPreview();
-		FrameLayout frameLayout = (FrameLayout) cameraFragmentView.findViewById(R.id.camera_preview);
-		frameLayout.addView(mPreview);
+        mFrameLayout = (FrameLayout) cameraFragmentView.findViewById(R.id.camera_preview);
 	    
 		// Add a listener to the Capture button
 	    Button captureButton = (Button) cameraFragmentView.findViewById(R.id.button_capture);
@@ -46,13 +40,24 @@ public class CameraFragment extends Fragment{
 	        }
 	    );
 	    
+	    Button switchCameraButton = (Button) cameraFragmentView.findViewById(R.id.camera_btn_toggle_chosen_camera);
+	    switchCameraButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mCallback.OnCameraFragmentBtnToggleChosenCameraClicked();
+			}
+		});
+	    
+	    
 	    return cameraFragmentView;
 	}
 
 	// Container Activity must implement this interface
 	public interface ICameraActivityCallback{
-		public CameraPreview getCameraPreview();
 		public void OnCameraFragmentBtnCaptureClicked();
+		public void OnCameraFragmentBtnToggleChosenCameraClicked();
+		public void OnFragmentResume();
 	}
 	
 	@Override
@@ -73,5 +78,28 @@ public class CameraFragment extends Fragment{
     	CameraFragment fragment = new CameraFragment();
 
         return fragment;
+    }
+    
+    public void SetCameraPreview(CameraPreview cameraPreview){
+    	mFrameLayout.removeAllViews();
+    	mFrameLayout.addView(cameraPreview);
+    }
+    
+    @Override
+    public void onDestroy() {
+    	//mFrameLayout.removeAllViews();
+    	super.onDestroy();
+    }
+    
+    @Override
+    public void onPause() {
+    	//mFrameLayout.removeAllViews();
+    	super.onPause();
+    }
+    
+    @Override
+    public void onResume() {
+    	mCallback.OnFragmentResume();
+    	super.onResume();
     }
 }

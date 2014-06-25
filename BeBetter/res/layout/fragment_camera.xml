@@ -14,8 +14,8 @@
       android:id="@+id/camera_btn_toggle_chosen_camera"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentRight="true"
+      android:layout_alignTop="@id/camera_preview"
+      android:layout_alignRight="@id/camera_preview"
       />
   
   <Button

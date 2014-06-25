@@ -11,5 +11,22 @@
 	<string name="fragment_contacts_text_view_contacts_with_bebetter_head_line">Contacts with BeBetter</string>
 	<string name="fragment_contacts_text_view_phone_contacts_head_line">Contacts without BeBetter</string>
 	<string name="fragment_contacts_text_view_bebetter_friends">BeBetter friends</string>
+	<string name="fragment_contacts_btn_send_challenge">Send challenge</string>
 	<string name="fragment_contacts_search_view">Find contact</string>
+	<string name="fragment_camera_preview_btn_accept_image">Accept image</string>
+	<string name="fragment_camera_preview_btn_retake_image">Retake image</string>
+	<string name="fragment_alert_dialog_no_camera_available">No camera available</string>
+	<string name="fragment_alert_dialog_file_error">Not enough phone memory</string>
+	<string name="fragment_alert_dialog_camera_preview">Error loading preview</string>
+	<string name="fragment_alert_dialog_error_title">Error</string>
+	
+	<string name="TIME_MINUTE_ONE_INTERVAL">Just now</string>
+	<string name="TIME_MINUTE_INTERVAL"> minutes ago</string>
+	<string name="TIME_HOUR_ONE_INTERVAL">About an hour ago</string>
+	<string name="TIME_HOUR_INTERVAL"> hours ago</string>
+	<string name="TIME_DAY_ONE_INTERVAL">1 day ago</string>
+	<string name="TIME_DAY_INTERVAL"> days ago</string>
+	<string name="TIME_MONTH_ONE_INTERVAL">1 month ago</string>
+	<string name="TIME_MONTH_INTERVAL"> months ago</string>    
+
 </resources>

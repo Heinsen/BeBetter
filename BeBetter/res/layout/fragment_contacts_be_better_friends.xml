@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+
+    <SearchView 
+        android:id="@+id/fragment_contacts_be_better_friends_search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="41sp"
+        android:layout_alignParentRight="true"
+        android:actionViewClass="android.widget.SearchView"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_contacts_be_better_friends_text_view_bebetter_friends"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_contacts_be_better_friends_search_view"
+        android:textSize="21sp"
+        android:text="@string/fragment_contacts_text_view_bebetter_friends"
+        />
+    
+   	<View 
+        android:id="@+id/fragment_contacts_be_better_friends_view_bebetter_divider"
+        style="@style/Divider"
+        android:layout_below="@id/fragment_contacts_be_better_friends_text_view_bebetter_friends"
+        />
+    
+    <ListView 
+        android:id="@+id/fragment_contacts_be_better_friends_list_view_bebetter_friends"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_contacts_be_better_friends_view_bebetter_divider"
+        ></ListView>
+    
+    <Button 
+        android:id="@+id/fragment_contacts_btn_send_challenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/fragment_contacts_btn_send_challenge"
+        android:enabled="false"
+        />
+    
+</RelativeLayout>

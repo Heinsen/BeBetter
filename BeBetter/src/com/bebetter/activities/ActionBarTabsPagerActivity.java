@@ -1,11 +1,17 @@
 package com.bebetter.activities;
 
 import com.bebetter.R;
+import com.bebetter.adapters.ContactItemAdapter.ContactItemAdapterListener;
+import com.bebetter.domainmodel.BeBetterNotification;
 import com.bebetter.domainmodel.Challenge;
+import com.bebetter.domainmodel.Contact;
 import com.bebetter.fragments.ChallengeFeedFragment;
 import com.bebetter.fragments.ContactsFragment;
+import com.bebetter.fragments.ContactsFragment.ContactsFragmentListener;
 import com.bebetter.fragments.MainFragment;
 import com.bebetter.fragments.MainFragment.OnCurrentChallengesListener;
+import com.bebetter.fragments.NotificationCenterFragment;
+import com.bebetter.fragments.NotificationCenterFragment.OnNotificationFragmentSelectedListener;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -24,15 +30,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
-public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCurrentChallengesListener{
+public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCurrentChallengesListener, OnNotificationFragmentSelectedListener, ContactItemAdapterListener, ContactsFragmentListener{
 
-	static final int NUM_ITEMS = 3;
-
+	static final int NUM_ITEMS = 4;
+	static final int ALL_CONTACTS = 0;
+	
 	MyAdapter mAdapter;
 	
 	ViewPager mPager;
 	
 	static ContactsFragment mContactsFragment;
+	static NotificationCenterFragment mNotificationCenterFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,6 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 		
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
-		
 	}
 
 	@Override
@@ -112,6 +119,8 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
     			//If the offset to the page in position is 0
     			if(positionOffset == 0)
     				mActionBar.setSelectedNavigationItem(position);
+    			if(positionOffset == 0 && position == 3)
+    				mNotificationCenterFragment.UpdateTimeStamps();
     		}
     		
     		@Override
@@ -135,8 +144,12 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 
 		@Override
 		public Fragment getItem(int position) {
+			if(position == 3){
+				mNotificationCenterFragment = NotificationCenterFragment.newInstance();
+				return mNotificationCenterFragment;
+			}
 			if(position == 2){
-				mContactsFragment = ContactsFragment.newInstance();
+				mContactsFragment = ContactsFragment.newInstance(ALL_CONTACTS);
 				return mContactsFragment;
 			}
 			if(position == 1){
@@ -166,12 +179,30 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 	public void OnCurrentChallengeSelected(
 			Challenge selectedCurrentChallengeListItem) {
 				if(checkCameraHardware(this)){
-					//Start Camera Activity
+					Intent CameraActivityIntent = new Intent(this, CameraActivity.class);
+					CameraActivityIntent.putExtra("ChallengeID", selectedCurrentChallengeListItem.getmChallengeID());
+					startActivity(CameraActivityIntent);
 				}
-				//else{} //TODO Make text warning that no camera is detected
-				
-					
+				//else{} //TODO Make text warning that no camera is detected		
 	}
 
+	@Override
+	public void onNotificationSelected(BeBetterNotification BeBetterNotifikation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onBeBetterFriendCheckedChangedListener(
+			Contact BeBetterFriendContact, boolean isChecked) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSendChallengeBtnClick() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

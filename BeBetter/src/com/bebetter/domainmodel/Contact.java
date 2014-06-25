@@ -2,20 +2,37 @@ package com.bebetter.domainmodel;
 
 public class Contact {
 
+	private int mContactType = 100;
+	boolean mIsChecked;
 	String mPhoneNumber;
 	String mDisplayName;
+
+	public int getContactType() {
+		return mContactType;
+	}
+	public void setContactType(int ContactType) {
+		this.mContactType = ContactType;
+	}
 	
-	public String getmPhoneNumber() {
+	public boolean isChecked() {
+		return mIsChecked;
+	}
+	
+	public void setChecked(boolean isChecked) {
+		this.mIsChecked = isChecked;
+	}
+	
+	public String getPhoneNumber() {
 		return mPhoneNumber;
 	}
-	public void setmPhoneNumber(String mPhoneNumber) {
+	public void setPhoneNumber(String mPhoneNumber) {
 		this.mPhoneNumber = mPhoneNumber;
 	}
 	
-	public String getmDisplayName() {
+	public String getDisplayName() {
 		return mDisplayName;
 	}
-	public void setmDisplayName(String mDisplayName) {
+	public void setDisplayName(String mDisplayName) {
 		this.mDisplayName = mDisplayName;
 	}
 	

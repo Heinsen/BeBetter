@@ -33,10 +33,9 @@ public class CameraPreviewFragment extends Fragment{
         return fragment;
     }
     
-    public void setImageView(String PicturePath)
+    public void setImageView(Bitmap Bitmap)
     {
-    	Bitmap myBitmap = BitmapFactory.decodeFile(PicturePath);
-    	mCameraPreviewImageView.setImageBitmap(myBitmap);
+    	mCameraPreviewImageView.setImageBitmap(Bitmap);
     	
     }
 	

@@ -29,7 +29,7 @@
         />
     
     <ListView 
-        android:id="@+id/fragment_contacts_list_view_bebetter_contacs"
+        android:id="@+id/fragment_contacts_list_view_bebetter_contacts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_view_contacts_with_bebetter_divider"
@@ -39,7 +39,7 @@
         android:id="@+id/fragment_contacts_text_view_phone_contacts_head_line"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_contacts_list_view_bebetter_contacs"
+        android:layout_below="@id/fragment_contacts_list_view_bebetter_contacts"
         android:textSize="21sp"
         android:text="@string/fragment_contacts_text_view_phone_contacts_head_line"
         />
@@ -77,6 +77,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_view_bebetter_divider"
-        ></ListView>
-    
+        />´
+            
 </RelativeLayout>

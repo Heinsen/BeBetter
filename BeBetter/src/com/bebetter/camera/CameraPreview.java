@@ -2,6 +2,11 @@ package com.bebetter.camera;
 
 import java.io.IOException;
 
+import com.bebetter.R;
+import com.bebetter.activities.CameraActivity;
+import com.bebetter.fragments.AlertDialogFragment;
+import com.bebetter.fragments.AlertDialogFragment.AlertDialogFragmentListener;
+
 import android.content.Context;
 import android.hardware.Camera;
 import android.view.SurfaceHolder;
@@ -11,11 +16,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
 	private SurfaceHolder mHolder;
     private Camera mCamera;
+    private CameraActivity mContext;
 	
 	public CameraPreview(Context context, Camera camera) {
 		super(context);
 		mCamera = camera;
-
+		mContext = (CameraActivity) context;
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = getHolder();
@@ -37,18 +43,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
-            //TODO Error handling setting camera preview
-        	//Log.d(TAG, "Error setting camera preview: " + e.getMessage());
+        	mContext.InstantiateAlertDialog(R.string.fragment_alert_dialog_error_title, R.string.fragment_alert_dialog_camera_preview);
         }		
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		
+		this.getHolder().removeCallback(this);
 	}
-
-	
-	
-	
 }
