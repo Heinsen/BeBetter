@@ -33,7 +33,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_be_better_friends_view_bebetter_divider"
-        ></ListView>
+        />
     
     <Button 
         android:id="@+id/fragment_contacts_btn_send_challenge"

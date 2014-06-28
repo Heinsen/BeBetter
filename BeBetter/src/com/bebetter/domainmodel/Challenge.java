@@ -19,12 +19,12 @@ public class Challenge {
 		mHeadlineText = "TEST HeadLineText TEST";
 	}
 	
-	public int getmChallengeID() {
+	public int getChallengeID() {
 		return mChallengeID;
 	}
 
-	public void setmChallengeID(int mChallengeID) {
-		this.mChallengeID = mChallengeID;
+	public void setChallengeID(int ChallengeID) {
+		this.mChallengeID = ChallengeID;
 	}
 
 	public String getHeadlineText() {

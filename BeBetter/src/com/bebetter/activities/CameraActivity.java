@@ -8,30 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bebetter.R;
-import com.bebetter.activities.ActionBarTabsPagerActivity.MyAdapter;
-import com.bebetter.adapters.ContactItemAdapter.ContactItemAdapterListener;
 import com.bebetter.camera.CameraPreview;
 import com.bebetter.domainmodel.Contact;
 import com.bebetter.fragments.AlertDialogFragment;
 import com.bebetter.fragments.AlertDialogFragment.AlertDialogFragmentListener;
 import com.bebetter.fragments.CameraFragment;
 import com.bebetter.fragments.CameraPreviewFragment;
-import com.bebetter.fragments.ChallengeFeedFragment;
 import com.bebetter.fragments.ContactsFragment;
 import com.bebetter.fragments.ContactsFragment.ContactsFragmentListener;
-import com.bebetter.fragments.MainFragment;
 import com.bebetter.fragments.CameraFragment.ICameraActivityCallback;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
-import android.media.ExifInterface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -39,15 +30,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.SparseArray;
-import android.view.SurfaceHolder;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-public class CameraActivity extends FragmentActivity implements ICameraActivityCallback, AlertDialogFragmentListener, ContactItemAdapterListener, ContactsFragmentListener{
+
+public class CameraActivity extends FragmentActivity implements ICameraActivityCallback, AlertDialogFragmentListener, ContactsFragmentListener{
 
 	static final int BEBETTER_FRIENDS = 1;
 	static final Boolean BACK_CAMERA = true; 
@@ -366,7 +352,6 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 			mFrontCamera = getCameraInstance(Camera.CameraInfo.CAMERA_FACING_FRONT);
 		
 		ReInstanciatePreview();
-
 		super.onResume();
 	}
 	
@@ -375,28 +360,10 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 		ReInstanciatePreview();
 	}
 
-	
 	@Override
 	public void onDialogDismiss() {
 		stopPreviewAndFreeCamera();
 		this.finish();
-	}
-
-	@Override
-	public void onBeBetterFriendCheckedChangedListener(Contact BeBetterFriendContact, boolean isChecked) {
-		if(isChecked){
-			mSelectedContacts.add(BeBetterFriendContact);
-		}
-		else{
-			mSelectedContacts.remove(BeBetterFriendContact);
-		}
-		
-		if(mSelectedContacts.size() == 0){
-			mContactsFragment.setSendChallengeFriendBtnAvailability(false);
-		}
-		else{
-			mContactsFragment.setSendChallengeFriendBtnAvailability(true);
-		}
 	}
 	
 	private void SendChallenge(){
@@ -408,7 +375,29 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 	@Override
 	public void onSendChallengeBtnClick() {
 		SendChallenge();
-		
 	}
-	
+
+	@Override
+	public void onContactClick(Contact selectedContact) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onBeBetterFriendClick(Contact BeBetterFriend) {
+		if(mSelectedContacts.contains(BeBetterFriend)){
+			mSelectedContacts.remove(BeBetterFriend);
+			BeBetterFriend.setIsSelected(false);
+		}
+		else{
+			mSelectedContacts.add(BeBetterFriend);
+			BeBetterFriend.setIsSelected(true);
+		}
+		
+		if(mSelectedContacts.size() == 0){
+			mContactsFragment.setSendChallengeFriendBtnAvailability(false);
+		}
+		else{
+			mContactsFragment.setSendChallengeFriendBtnAvailability(true);
+		}
+	}
 }

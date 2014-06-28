@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView 
+        android:id="@+id/fragment_challenge_image_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitStart"
+        android:visibility="invisible"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_challenge_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:visibility="invisible"
+        android:layout_alignBottom="@id/fragment_challenge_image_view"
+        android:layout_alignLeft="@id/fragment_challenge_image_view"
+        android:textColor="@color/White"
+        />
+    
+    <ProgressBar 
+        android:id="@+id/fragment_challenge_progress_bar"
+        android:layout_width="81sp"
+        android:layout_height="81sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+    
+</RelativeLayout>

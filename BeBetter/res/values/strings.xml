@@ -19,7 +19,15 @@
 	<string name="fragment_alert_dialog_file_error">Not enough phone memory</string>
 	<string name="fragment_alert_dialog_camera_preview">Error loading preview</string>
 	<string name="fragment_alert_dialog_error_title">Error</string>
-	
+	<string name="fragment_challenge_btn_share_challenge">Share</string>
+	<string name="fragment_challenge_btn_like_challenge">Like</string>
+	<string name="fragment_challenge_btn_join_challenge">Join challenge</string>
+	<string name="fragment_settings_text_view_head_line">Settings</string>
+	<string name="fragment_settings_text_view_find_friends_easier">Find friends easier</string>
+	<string name="fragment_settings_text_view_phone_number">Phone number:</string>
+	<string name="fragment_settings_edit_text_phone_number">+45 12 34 56 78</string>
+	<string name="fragment_settings_text_view_user_name">Username:</string>
+		
 	<string name="TIME_MINUTE_ONE_INTERVAL">Just now</string>
 	<string name="TIME_MINUTE_INTERVAL"> minutes ago</string>
 	<string name="TIME_HOUR_ONE_INTERVAL">About an hour ago</string>

@@ -4,45 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bebetter.R;
-import com.bebetter.adapters.ChallengeFeedItemAdapter;
+import com.bebetter.adapters.BeBetterContactItemAdapter;
+import com.bebetter.adapters.BeBetterFriendItemAdapter;
 import com.bebetter.adapters.ContactItemAdapter;
-import com.bebetter.adapters.ContactItemAdapter.ContactItemAdapterListener;
-import com.bebetter.domainmodel.Challenge;
-
-
-
-
-
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Contacts;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-
 import com.bebetter.domainmodel.Contact;
-import com.bebetter.fragments.AlertDialogFragment.AlertDialogFragmentListener;
 
 public class ContactsFragment extends Fragment{
 
@@ -112,7 +98,7 @@ public class ContactsFragment extends Fragment{
 				public void onClick(View v) {
 					mListener.onSendChallengeBtnClick();			
 				}
-			});
+			}); 
     	}
 
     	return mFragmentContactsView;
@@ -120,6 +106,8 @@ public class ContactsFragment extends Fragment{
     
 	public interface ContactsFragmentListener {
 		public void onSendChallengeBtnClick();
+		public void onContactClick(Contact selectedContact);
+		public void onBeBetterFriendClick(Contact BeBetterFriend);
 	}
     
 	@Override
@@ -186,33 +174,55 @@ public class ContactsFragment extends Fragment{
     		mContactsAdapter = new ContactItemAdapter(getActivity(), R.id.fragment_contacts_list_view_phone_contacts, mContacts);
     		// Setting adapter
     		mContactsListView.setAdapter(mContactsAdapter);
+    		
+    		mContactsListView.setOnItemClickListener(new OnItemClickListener() {
+        		@Override
+    			public void onItemClick(AdapterView<?> parent, View view,
+    					int position, long id) {			
+        			mListener.onContactClick(mContacts.get(position));
+    			}
+    		});
 
     		// Gets the ListView from the View list of the parent activity
     		mBeBetterContactsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_list_view_bebetter_contacts);
     		// Setting up the adapter
-    		mBeBetterContactsAdapter = new ContactItemAdapter(getActivity(), R.id.fragment_contacts_list_view_phone_contacts, mBeBetterContacts);
+    		mBeBetterContactsAdapter = new BeBetterContactItemAdapter(getActivity(), R.id.fragment_contacts_list_view_phone_contacts, mBeBetterContacts);
     		// Setting adapter
     		mBeBetterContactsListView.setAdapter(mBeBetterContactsAdapter);
     		
             // Gets the ListView from the View list of the parent activity
             mBeBetterFriendsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_list_view_bebetter_friends);
             // Setting up adapter
-            mBeBetterFriendsAdapter = new ContactItemAdapter(getActivity(), R.id.fragment_contacts_list_view_bebetter_friends, mBeBetterFriends);
+            mBeBetterFriendsAdapter = new BeBetterFriendItemAdapter(getActivity(), R.id.fragment_contacts_list_view_bebetter_friends, mBeBetterFriends, false);
             // Setting adapter
-            mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);
+            mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);    
     	}
     	else{
             // Gets the ListView from the View list of the parent activity
             mBeBetterFriendsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends);
             // Setting up adapter
-            mBeBetterFriendsAdapter = new ContactItemAdapter(getActivity(), R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends, mBeBetterFriends);
+            mBeBetterFriendsAdapter = new BeBetterFriendItemAdapter(getActivity(), R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends, mBeBetterFriends, true);
             // Setting adapter
             mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);
-            
     	}
-        
+    	
+    	
+        mBeBetterFriendsListView.setOnItemClickListener(new OnItemClickListener() {
 
-        
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Contact selectedBeBetterFriend = mBeBetterFriends.get(position);
+				if(selectedBeBetterFriend.getIsSelected())
+					selectedBeBetterFriend.setIsSelected(false);
+				else
+					selectedBeBetterFriend.setIsSelected(true);
+				mBeBetterFriendsAdapter.notifyDataSetChanged();
+				mListener.onBeBetterFriendClick(selectedBeBetterFriend);
+				
+			}
+		});
+    	
     }
     
     private void SortContacts(){
@@ -226,21 +236,9 @@ public class ContactsFragment extends Fragment{
     	mBeBetterFriends.addAll(GetPhoneContacs());
     	mContacts.addAll(GetPhoneContacs());
     	
-    	for(int i = 0; mBeBetterFriends.size() > i; i++){
-    		Contact currentContact = mBeBetterFriends.get(i);
-    		currentContact.setContactType(TYPE_BEBETTER_FRIEND);
-       	}
-    	
-    	for(int i = 0; mBeBetterContacts.size() > i; i++){
-    		Contact currentContact = mBeBetterContacts.get(i);
-    		currentContact.setContactType(TYPE_CONTACT_WITH_BEBETTER);
-    	}
-		
-		for(int i = 0; mContacts.size() > i; i++){
-			Contact currentContact = mContacts.get(i);
-			currentContact.setContactType(TYPE_CONTACT);
-		}
-    	
+    	//for(int i = 0; mBeBetterFriends.size() > i; i++){
+    	//	Contact currentContact = mBeBetterFriends.get(i);
+    	//}
     }
     
     private List<Contact> GetPhoneContacs(){

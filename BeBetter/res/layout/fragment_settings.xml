@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView 
+        android:id="@+id/fragment_settings_text_view_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:text="@string/fragment_settings_text_view_head_line"
+        />
+    
+    <View 
+        android:id="@+id/fragment_settings_view_head_line_divider"
+        style="@style/Divider"
+        android:layout_below="@id/fragment_settings_text_view_head_line"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_settings_text_view_find_friends_easier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/fragment_settings_text_view_find_friends_easier"
+        android:layout_below="@id/fragment_settings_view_head_line_divider"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_settings_text_view_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/fragment_settings_text_view_phone_number"
+        android:layout_below="@id/fragment_settings_text_view_find_friends_easier"
+        />
+    
+    <EditText 
+        android:id="@+id/fragment_settings_edit_text_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:inputType="phone"
+        android:hint="@string/fragment_settings_edit_text_phone_number"
+        android:layout_below="@id/fragment_settings_text_view_phone_number"
+        />
+    
+    <View 
+        android:id="@+id/fragment_settings_view_phone_number_divider"
+        style="@style/Divider"
+        android:layout_below="@id/fragment_settings_edit_text_phone_number"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_settings_text_view_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:textSize="18sp"
+		android:text="@string/fragment_settings_text_view_user_name"
+		android:layout_below="@id/fragment_settings_view_phone_number_divider"
+        />
+    
+    <EditText 
+        android:id="@+id/fragment_settings_edit_text_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_below="@id/fragment_settings_text_view_user_name"
+        />
+    
+    
+
+</RelativeLayout>

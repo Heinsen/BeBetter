@@ -1,7 +1,7 @@
 package com.bebetter.activities;
 
 import com.bebetter.R;
-import com.bebetter.adapters.ContactItemAdapter.ContactItemAdapterListener;
+import com.bebetter.adapters.BeBetterContactItemAdapter.BeBetterContactItemAdapterListener;
 import com.bebetter.domainmodel.BeBetterNotification;
 import com.bebetter.domainmodel.Challenge;
 import com.bebetter.domainmodel.Contact;
@@ -30,7 +30,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
-public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCurrentChallengesListener, OnNotificationFragmentSelectedListener, ContactItemAdapterListener, ContactsFragmentListener{
+public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCurrentChallengesListener, OnNotificationFragmentSelectedListener, ContactsFragmentListener, BeBetterContactItemAdapterListener{
 
 	static final int NUM_ITEMS = 4;
 	static final int ALL_CONTACTS = 0;
@@ -77,6 +77,10 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 					mPager.setCurrentItem(0);
 				else if(tag == "ChallengeTab")
 					mPager.setCurrentItem(1);
+				else if(tag == "ContactsTab")
+					mPager.setCurrentItem(2);
+				else if(tag == "NotificationsTab")
+					mPager.setCurrentItem(3);
 			}
 
 			@Override
@@ -180,7 +184,7 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 			Challenge selectedCurrentChallengeListItem) {
 				if(checkCameraHardware(this)){
 					Intent CameraActivityIntent = new Intent(this, CameraActivity.class);
-					CameraActivityIntent.putExtra("ChallengeID", selectedCurrentChallengeListItem.getmChallengeID());
+					CameraActivityIntent.putExtra("ChallengeID", selectedCurrentChallengeListItem.getChallengeID());
 					startActivity(CameraActivityIntent);
 				}
 				//else{} //TODO Make text warning that no camera is detected		
@@ -193,16 +197,30 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 	}
 
 	@Override
-	public void onBeBetterFriendCheckedChangedListener(
-			Contact BeBetterFriendContact, boolean isChecked) {
+	public void onSendChallengeBtnClick() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onContactClick(Contact selectedContact) {
+		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+		smsIntent.setType("vnd.android-dir/mms-sms");
+		smsIntent.putExtra("address", selectedContact.getPhoneNumber());
+		smsIntent.putExtra("sms_body","Hey " + selectedContact.getDisplayName() + ", join the BeBetter comunity!");
+		startActivity(smsIntent);
+	}
+
+	@Override
+	public void onBeBetterFriendSelectedListener(Contact BeBetterFriendContact) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onSendChallengeBtnClick() {
-		// TODO Auto-generated method stub
-		
+	public void onBeBetterFriendClick(Contact BeBetterFriend) {
+		//Switching to ChallengeFeedFragment
+		mPager.setCurrentItem(1);
 	}
 
 }

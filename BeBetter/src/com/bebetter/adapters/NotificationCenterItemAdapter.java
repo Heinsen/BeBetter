@@ -1,24 +1,18 @@
 package com.bebetter.adapters;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import android.content.Context;
-import android.opengl.Visibility;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.bebetter.R;
 import com.bebetter.domainmodel.BeBetterNotification;
-import com.bebetter.domainmodel.Contact;
 import com.bebetter.fragments.NotificationCenterFragment;
 
 public class NotificationCenterItemAdapter extends BaseAdapter {
