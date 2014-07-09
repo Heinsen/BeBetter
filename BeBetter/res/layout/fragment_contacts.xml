@@ -28,18 +28,28 @@
         android:layout_below="@id/fragment_contacts_text_view_contacts_with_bebetter_head_line"
         />
     
+    <TextView 
+        android:id="@+id/fragment_contacts_text_view_no_contacts_with_bebetter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/fragment_contacts_text_view_no_contacts"
+        android:layout_below="@id/fragment_contacts_view_contacts_with_bebetter_divider"
+        />
+    
     <ListView 
         android:id="@+id/fragment_contacts_list_view_bebetter_contacts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_view_contacts_with_bebetter_divider"
+        android:visibility="gone"
         />
     
     <TextView 
         android:id="@+id/fragment_contacts_text_view_phone_contacts_head_line"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_contacts_list_view_bebetter_contacts"
+        android:layout_below="@id/fragment_contacts_text_view_no_contacts_with_bebetter"
         android:textSize="21sp"
         android:text="@string/fragment_contacts_text_view_phone_contacts_head_line"
         />
@@ -50,18 +60,27 @@
         android:layout_below="@id/fragment_contacts_text_view_phone_contacts_head_line"
         />
     
+    <TextView android:id="@+id/fragment_contacts_text_view_no_phone_contacts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/fragment_contacts_text_view_no_phone_contacts"
+        android:layout_below="@id/fragment_contacts_view_phone_contacts_divider"
+        />
+    
     <ListView 
         android:id="@+id/fragment_contacts_list_view_phone_contacts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_view_phone_contacts_divider"
+        android:visibility="gone"
         />
     
     <TextView 
         android:id="@+id/fragment_contacts_text_view_bebetter_friends"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_contacts_list_view_phone_contacts"
+        android:layout_below="@id/fragment_contacts_text_view_no_phone_contacts"
         android:textSize="21sp"
         android:text="@string/fragment_contacts_text_view_bebetter_friends"
         />
@@ -72,11 +91,20 @@
         android:layout_below="@id/fragment_contacts_text_view_bebetter_friends"
         />
     
+   	<TextView 
+   	    android:id="@+id/fragment_contacts_text_view_no_bebetter_friends"
+   	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/fragment_contacts_text_view_no_bebetter_friends"
+		android:textSize="18sp"
+		android:layout_below="@id/fragment_contacts_view_bebetter_divider"
+   	    />
+   	
     <ListView 
         android:id="@+id/fragment_contacts_list_view_bebetter_friends"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_view_bebetter_divider"
-        />´
+        />
             
 </RelativeLayout>

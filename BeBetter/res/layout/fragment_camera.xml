@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-  <FrameLayout
-    android:id="@+id/camera_preview"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    />
+    android:orientation="horizontal" >
 
-  <Button 
-      android:id="@+id/camera_btn_toggle_chosen_camera"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@id/camera_preview"
-      android:layout_alignRight="@id/camera_preview"
-      />
-  
-  <Button
-    android:id="@+id/button_capture"
-    android:text="Capture"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_alignParentBottom="true"
-    />
+    <FrameLayout
+        android:id="@+id/fragment_camera_preview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <Button
+        android:id="@+id/fragment_camera_btn_toggle_chosen_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/fragment_camera_preview"
+        android:layout_alignTop="@id/fragment_camera_preview" 
+        android:text="@string/fragment_camera_btn_toggle_chosen_camera"/>
+
+    <Button
+        android:id="@+id/fragment_camera_btn_capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="@string/fragment_camera_btn_capture" />
+
 </RelativeLayout>

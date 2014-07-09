@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    
+    <TextView 
+        android:id="@+id/fragment_login_text_view_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="@string/fragment_login_text_view_username"
+        />
+    
+    <EditText 
+        android:id="@+id/fragment_login_edit_text_usernamer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragment_login_edit_text_username"
+        android:layout_below="@id/fragment_login_text_view_username"
+        />
+    
+    <TextView 
+        android:id="@+id/fragment_login_text_view_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_login_text_view_password"
+        android:textSize="18sp"
+        android:layout_below="@id/fragment_login_edit_text_usernamer"
+        />
+    
+    <EditText 
+        android:id="@+id/fragment_login_edit_text_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragment_login_edit_text_password"
+        android:layout_below="@id/fragment_login_text_view_password"
+        />
+    
+    <Button 
+        android:id="@+id/fragment_login_btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_login_btn_login"
+        android:textSize="18sp"
+        android:layout_below="@id/fragment_login_edit_text_password"
+        />
+    
+    <ProgressBar
+        android:id="@+id/fragment_login_progress_bar_waiting"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" 
+        />
+    
+</RelativeLayout>

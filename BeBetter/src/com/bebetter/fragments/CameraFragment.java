@@ -21,16 +21,17 @@ public class CameraFragment extends Fragment{
     private CameraPreview mPreview;
     private ICameraActivityCallback mCallback;
     private FrameLayout mFrameLayout;
+    private Button mSwitchCameraButton;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		View cameraFragmentView = inflater.inflate(R.layout.fragment_camera, container, false);
-        mFrameLayout = (FrameLayout) cameraFragmentView.findViewById(R.id.camera_preview);
+        mFrameLayout = (FrameLayout) cameraFragmentView.findViewById(R.id.fragment_camera_preview);
 	    
 		// Add a listener to the Capture button
-	    Button captureButton = (Button) cameraFragmentView.findViewById(R.id.button_capture);
+	    Button captureButton = (Button) cameraFragmentView.findViewById(R.id.fragment_camera_btn_capture);
 	    captureButton.setOnClickListener(
 	        new View.OnClickListener() {
 	            @Override
@@ -40,15 +41,14 @@ public class CameraFragment extends Fragment{
 	        }
 	    );
 	    
-	    Button switchCameraButton = (Button) cameraFragmentView.findViewById(R.id.camera_btn_toggle_chosen_camera);
-	    switchCameraButton.setOnClickListener(new View.OnClickListener() {
+	    mSwitchCameraButton = (Button) cameraFragmentView.findViewById(R.id.fragment_camera_btn_toggle_chosen_camera);
+	    mSwitchCameraButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				mCallback.OnCameraFragmentBtnToggleChosenCameraClicked();
 			}
 		});
-	    
 	    
 	    return cameraFragmentView;
 	}
@@ -76,8 +76,11 @@ public class CameraFragment extends Fragment{
 	
     public static CameraFragment newInstance() {
     	CameraFragment fragment = new CameraFragment();
-
         return fragment;
+    }
+    
+    public void HideCameraBtnToggleCamera(){
+    	mSwitchCameraButton.setVisibility(View.GONE);
     }
     
     public void SetCameraPreview(CameraPreview cameraPreview){

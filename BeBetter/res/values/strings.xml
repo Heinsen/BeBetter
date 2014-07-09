@@ -11,8 +11,12 @@
 	<string name="fragment_contacts_text_view_contacts_with_bebetter_head_line">Contacts with BeBetter</string>
 	<string name="fragment_contacts_text_view_phone_contacts_head_line">Contacts without BeBetter</string>
 	<string name="fragment_contacts_text_view_bebetter_friends">BeBetter friends</string>
+	<string name="fragment_contacts_text_view_no_contacts">No BeBetter friends added</string>
+	<string name="fragment_contacts_text_view_no_phone_contacts">No contacts added</string>
+	<string name="fragment_contacts_text_view_no_bebetter_friends">No contacts added</string>
 	<string name="fragment_contacts_btn_send_challenge">Send challenge</string>
 	<string name="fragment_contacts_search_view">Find contact</string>
+	<string name="fragment_contacts_be_better_friends_text_view_no_friends">You have not added any friends with BeBetter</string>
 	<string name="fragment_camera_preview_btn_accept_image">Accept image</string>
 	<string name="fragment_camera_preview_btn_retake_image">Retake image</string>
 	<string name="fragment_alert_dialog_no_camera_available">No camera available</string>
@@ -27,7 +31,18 @@
 	<string name="fragment_settings_text_view_phone_number">Phone number:</string>
 	<string name="fragment_settings_edit_text_phone_number">+45 12 34 56 78</string>
 	<string name="fragment_settings_text_view_user_name">Username:</string>
-		
+	<string name="fragment_camera_btn_capture">Capture</string>
+	<string name="fragment_camera_btn_toggle_chosen_camera">Toggle Camera</string>
+	<string name="fragment_camera_preview_image_view">Newly taken picture</string>
+	<string name="start_SMS_body_text">Hey </string>
+	<string name="end_SMS_body_text">, join the BeBetter comunity!</string>
+	<string name="fragment_login_text_view_username">Usernamer:</string>
+	<string name="fragment_login_edit_text_username">Enter username</string>
+	<string name="fragment_login_text_view_password">Password:</string>
+	<string name="fragment_login_edit_text_password">Enter password</string>
+	<string name="fragment_login_btn_login">Login</string>
+	<string name="fragment_login_alert_dialog_title">Log in information error</string>
+	<string name="fragment_login_alert_dialog_error_msg">There was a problem with your log in information</string>
 	<string name="TIME_MINUTE_ONE_INTERVAL">Just now</string>
 	<string name="TIME_MINUTE_INTERVAL"> minutes ago</string>
 	<string name="TIME_HOUR_ONE_INTERVAL">About an hour ago</string>

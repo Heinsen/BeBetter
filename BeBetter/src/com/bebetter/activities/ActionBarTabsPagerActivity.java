@@ -52,16 +52,10 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 		
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 		
 		final ActionBar mActionBar = getActionBar();
 		mActionBar.show();
 		mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		
 		// Create a tab listener that is called when the user changes tabs.
 	    ActionBar.TabListener tabListener = new ActionBar.TabListener() {
@@ -133,7 +127,11 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
     			
     		}
     	});
-	
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 	};
 	
 	public static class MyAdapter extends FragmentPagerAdapter {
@@ -193,13 +191,11 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 	@Override
 	public void onNotificationSelected(BeBetterNotification BeBetterNotifikation) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onSendChallengeBtnClick() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
@@ -207,7 +203,7 @@ public class ActionBarTabsPagerActivity extends FragmentActivity implements OnCu
 		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
 		smsIntent.setType("vnd.android-dir/mms-sms");
 		smsIntent.putExtra("address", selectedContact.getPhoneNumber());
-		smsIntent.putExtra("sms_body","Hey " + selectedContact.getDisplayName() + ", join the BeBetter comunity!");
+		smsIntent.putExtra("sms_body",R.string.start_SMS_body_text + selectedContact.getDisplayName() + R.string.end_SMS_body_text);
 		startActivity(smsIntent);
 	}
 

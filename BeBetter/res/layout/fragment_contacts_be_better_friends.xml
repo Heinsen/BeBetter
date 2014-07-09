@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     >
-
+    
     <SearchView 
         android:id="@+id/fragment_contacts_be_better_friends_search_view"
         android:layout_width="wrap_content"
@@ -28,11 +28,21 @@
         android:layout_below="@id/fragment_contacts_be_better_friends_text_view_bebetter_friends"
         />
     
+   	<TextView 
+   	    android:id="@+id/fragment_contacts_be_better_friends_text_view_no_friends"
+   	    android:layout_width="fill_parent"
+   	    android:layout_height="wrap_content"
+   	    android:layout_below="@id/fragment_contacts_be_better_friends_view_bebetter_divider"
+   	    android:textSize="18sp"
+   	    android:text="@string/fragment_contacts_be_better_friends_text_view_no_friends"
+   	    />
+   	
     <ListView 
         android:id="@+id/fragment_contacts_be_better_friends_list_view_bebetter_friends"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/fragment_contacts_be_better_friends_view_bebetter_divider"
+        android:visibility="gone"
         />
     
     <Button 

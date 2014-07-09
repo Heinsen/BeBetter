@@ -7,6 +7,7 @@ import com.bebetter.R;
 import com.bebetter.adapters.BeBetterContactItemAdapter;
 import com.bebetter.adapters.BeBetterFriendItemAdapter;
 import com.bebetter.adapters.ContactItemAdapter;
+
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
@@ -26,8 +27,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
+
 import com.bebetter.domainmodel.Contact;
 
 public class ContactsFragment extends Fragment{
@@ -37,7 +41,7 @@ public class ContactsFragment extends Fragment{
 	static final int TYPE_CONTACT = 0;
 	static final int TYPE_CONTACT_WITH_BEBETTER = 1;
 	static final int TYPE_BEBETTER_FRIEND = 2;
-	private static int mIncludedContracts;
+	private static int mIncludedContacts;
 	
     // Defines a variable for the search string
     private String mSearchString = "";
@@ -78,7 +82,7 @@ public class ContactsFragment extends Fragment{
     	SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
     	
     	// Inflate the fragment layout
-    	if(mIncludedContracts == ALL_CONTACTS){
+    	if(mIncludedContacts == ALL_CONTACTS){
     		mFragmentContactsView = inflater.inflate(R.layout.fragment_contacts, container, false);
         	//Setting up SearchView
         	mSearchView = (SearchView) mFragmentContactsView.findViewById(R.id.fragment_contacts_search_view);   	
@@ -144,7 +148,7 @@ public class ContactsFragment extends Fragment{
 			public boolean onQueryTextChange(String newText) {
 				mSearchString = mSearchView.getQuery().toString();
 				
-				if(mIncludedContracts == ALL_CONTACTS){
+				if(mIncludedContacts == ALL_CONTACTS){
 					mContactsAdapter.getFilter().filter(mSearchString);
 					mBeBetterContactsAdapter.getFilter().filter(mSearchString);
 					mBeBetterFriendsAdapter.getFilter().filter(mSearchString);
@@ -157,8 +161,8 @@ public class ContactsFragment extends Fragment{
 		});
     }
     
-    public static ContactsFragment newInstance(int IncludedContracts) {
-    	mIncludedContracts = IncludedContracts;
+    public static ContactsFragment newInstance(int IncludedContacts) {
+    	mIncludedContacts = IncludedContacts;
     	ContactsFragment fragment = new ContactsFragment();
         return fragment;
     }
@@ -166,7 +170,7 @@ public class ContactsFragment extends Fragment{
     //Instantiates the view
     private void InstantiateView(){
 
-    	if(mIncludedContracts == ALL_CONTACTS)
+    	if(mIncludedContacts == ALL_CONTACTS)
     	{
     		// Gets the ListView from the View list of the parent activity
     		mContactsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_list_view_phone_contacts);
@@ -195,15 +199,48 @@ public class ContactsFragment extends Fragment{
             // Setting up adapter
             mBeBetterFriendsAdapter = new BeBetterFriendItemAdapter(getActivity(), R.id.fragment_contacts_list_view_bebetter_friends, mBeBetterFriends, false);
             // Setting adapter
-            mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);    
+            mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);
+            
+            // Show no bebetter friends text view if no friends are added
+            if(mBeBetterFriends.size() == 0){
+            	TextView noBeBetterFriendsTextView = (TextView) mFragmentContactsView.findViewById(R.id.fragment_contacts_text_view_no_bebetter_friends);
+            	noBeBetterFriendsTextView.setVisibility(View.VISIBLE);
+            	mBeBetterFriendsListView.setVisibility(View.GONE);
+            }
+            
+            // Show no contacts text view if no contacts are added
+            if(mContacts.size() == 0){
+            	TextView noContactsTextView = (TextView) mFragmentContactsView.findViewById(R.id.fragment_contacts_text_view_no_phone_contacts);
+            	noContactsTextView.setVisibility(View.VISIBLE);
+            	mContactsListView.setVisibility(View.GONE);
+            	RelativeLayout.LayoutParams beBetterFriendsHeadLineParams = (RelativeLayout.LayoutParams) mFragmentContactsView.findViewById(R.id.fragment_contacts_list_view_bebetter_friends).getLayoutParams();
+            	beBetterFriendsHeadLineParams.addRule(RelativeLayout.BELOW, R.id.fragment_contacts_text_view_no_phone_contacts);
+            }
+            
+    		// Show no friends text view if no friends are added
+    		if(mBeBetterContacts.size() == 0){
+    			TextView noFriendsTextView = (TextView) mFragmentContactsView.findViewById(R.id.fragment_contacts_text_view_no_contacts_with_bebetter);
+    			noFriendsTextView.setVisibility(View.VISIBLE);
+    			mBeBetterContactsListView.setVisibility(View.GONE);
+    			RelativeLayout.LayoutParams contactsHeadLineParams = (RelativeLayout.LayoutParams) mFragmentContactsView.findViewById(R.id.fragment_contacts_text_view_phone_contacts_head_line).getLayoutParams();
+    			contactsHeadLineParams.addRule(RelativeLayout.BELOW, R.id.fragment_contacts_text_view_no_contacts_with_bebetter);
+    		}
     	}
     	else{
             // Gets the ListView from the View list of the parent activity
-            mBeBetterFriendsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends);
+            mBeBetterFriendsListView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_list_view_bebetter_friends);
             // Setting up adapter
-            mBeBetterFriendsAdapter = new BeBetterFriendItemAdapter(getActivity(), R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends, mBeBetterFriends, true);
+            mBeBetterFriendsAdapter = new BeBetterFriendItemAdapter(getActivity(), R.id.fragment_contacts_list_view_bebetter_friends, mBeBetterFriends, true);
             // Setting adapter
             mBeBetterFriendsListView.setAdapter(mBeBetterFriendsAdapter);
+    		// Hide no friends text view if some friends are added
+            if(mBeBetterContacts.size() != 0)
+    		{
+    			TextView noFriendsTextView = (TextView) mFragmentContactsView.findViewById(R.id.fragment_contacts_be_better_friends_text_view_no_friends);
+    			noFriendsTextView.setVisibility(View.GONE);
+    			ListView listView = (ListView) mFragmentContactsView.findViewById(R.id.fragment_contacts_be_better_friends_list_view_bebetter_friends);
+    			listView.setVisibility(View.VISIBLE);
+    		}
     	}
     	
     	

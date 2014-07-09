@@ -8,6 +8,8 @@
         android:id="@+id/fragment_camera_preview_image_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/fragment_camera_preview_image_view"
         />
     
     <Button 

@@ -14,9 +14,11 @@ import com.bebetter.fragments.AlertDialogFragment;
 import com.bebetter.fragments.AlertDialogFragment.AlertDialogFragmentListener;
 import com.bebetter.fragments.CameraFragment;
 import com.bebetter.fragments.CameraPreviewFragment;
+import com.bebetter.fragments.CameraPreviewFragment.OnCamereaPreviewFragmentSelectedListener;
 import com.bebetter.fragments.ContactsFragment;
 import com.bebetter.fragments.ContactsFragment.ContactsFragmentListener;
 import com.bebetter.fragments.CameraFragment.ICameraActivityCallback;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -30,10 +32,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.SparseArray;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 
-public class CameraActivity extends FragmentActivity implements ICameraActivityCallback, AlertDialogFragmentListener, ContactsFragmentListener{
+public class CameraActivity extends FragmentActivity implements ICameraActivityCallback, AlertDialogFragmentListener, ContactsFragmentListener, OnCamereaPreviewFragmentSelectedListener{
 
 	static final int BEBETTER_FRIENDS = 1;
 	static final Boolean BACK_CAMERA = true; 
@@ -46,10 +51,13 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 	private static SparseArray<Fragment> mRegisteredFragments = new SparseArray<Fragment>();
 	File mPictureFile;
 	Boolean mChosenCamera;
-	Boolean mImageHasBeenTake = false;
+	Boolean mImageHasBeenTaken = false;
+	Boolean mFirstImageHasBeenTaken = false;
 	CameraPreview mCameraPreview;
 	List<Contact> mSelectedContacts;
 	static ContactsFragment mContactsFragment;
+	static CameraFragment mCameraFragment;
+	static CameraPreviewFragment mCameraPreviewFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,18 +77,21 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 		if(mBackCamera == null && mFrontCamera == null){
 			InstantiateAlertDialog(R.string.fragment_alert_dialog_error_title, R.string.fragment_alert_dialog_no_camera_available);
 		}
-		//Show FRONT_CAMERA if BACK_CAMERA is not available
+		//Show FRONT_CAMERA if BACK_CAMERA is not available, then hide the toggle camera button
 		else if(mBackCamera == null){
 			mChosenCamera = FRONT_CAMERA;
+			mCameraFragment.HideCameraBtnToggleCamera();
 		}
-		 //Show BACK_CAMERA if it is available
+		//Show BACK_CAMERA if it is available, then hide the toggle camera button if the FRONT_CAMERA is not available
 		else{
 			mChosenCamera = BACK_CAMERA;
+			if(mFrontCamera == null)
+				mCameraFragment.HideCameraBtnToggleCamera();
 		}
 		
 		//Setting up OnPageChangeListener
         mPager.setOnPageChangeListener(new OnPageChangeListener() {
-    		
+        	
     		@Override
     		public void onPageSelected(int arg0) {
     			// TODO Auto-generated method stub
@@ -89,19 +100,32 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
     		@Override
     		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     			//If the offset to the page in position is 0
-    			if(positionOffset == 0 && mPager.getCurrentItem() == 0){
-    					if(mImageHasBeenTake){
-    						ReInstanciatePreview();
-    						mImageHasBeenTake = false;
+    			if(positionOffset == 0 && position == 0){
+    					if(mImageHasBeenTaken){
+    						mImageHasBeenTaken = false;
     					}
     			}
+    			if(!mFirstImageHasBeenTaken){
+    				mPager.setCurrentItem(0);
+    			}
     		}
-    		
+    		   		
     		@Override
     		public void onPageScrollStateChanged(int position) {
     			// TODO Auto-generated method stub
     		}
     	});
+        
+        
+        mPager.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(!mFirstImageHasBeenTaken)
+					return true;
+				else
+					return false;
+			}
+		});
     }
     
     private PictureCallback mPicture = new PictureCallback() {
@@ -184,14 +208,16 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 				return mContactsFragment;
 			}
 			if(position == 1){
-				return CameraPreviewFragment.newInstance();
+				mCameraPreviewFragment = CameraPreviewFragment.newInstance();
+				return mCameraPreviewFragment;
 			}
-			if(position == 0)
-				return CameraFragment.newInstance();
-			
+			if(position == 0){
+				mCameraFragment = CameraFragment.newInstance();
+				return mCameraFragment;
+			}
 			return null;
 		}
-		
+			
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			Fragment fragment = (Fragment) super.instantiateItem(container, position);
@@ -272,14 +298,16 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 		else if(mChosenCamera == FRONT_CAMERA && mFrontCamera != null){
 			mFrontCamera.takePicture(null, null, mPicture);
 		}
-		mImageHasBeenTake = true;
+		mImageHasBeenTaken = true;
+		mFirstImageHasBeenTaken = true;
 	}
 
 	private void SwitchToCameraPreviewFragment(){
 		//Switching to CameraPreviewFragment
 		mPager.setCurrentItem(1);
 		//Sending the taken picture to the CameraPreviewFragment
-        ((CameraPreviewFragment) mAdapter.getRegisteredFragment(1)).setImageView(setImageInPortrait(mPictureFile.getAbsolutePath()));
+		mCameraPreviewFragment.setImageView(setImageInPortrait(mPictureFile.getAbsolutePath()));
+		ReInstanciatePreview();
 	}
 	
 	private void stopPreviewAndFreeCamera() {
@@ -399,5 +427,15 @@ public class CameraActivity extends FragmentActivity implements ICameraActivityC
 		else{
 			mContactsFragment.setSendChallengeFriendBtnAvailability(true);
 		}
+	}
+
+	@Override
+	public void onRetakeImageBtnClicked() {
+		mPager.setCurrentItem(0);	
+	}
+
+	@Override
+	public void onAcceptImageBtnClicked() {
+		mPager.setCurrentItem(2);
 	}
 }
